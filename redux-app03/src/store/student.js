@@ -2,9 +2,24 @@
 let initState = {
   isLoading:false,
   list:[],
-  message:''
+  message:'',
+  category:[],
+  article:[]
 }
 // action generator
+export function setCaregory(payload){
+  return {
+    type:'SET_CATEGORY',
+    payload
+  }
+}
+export function setArticle(payload){
+  return {
+    type:'SET_Article',
+    payload
+  }
+}
+
 // 将学生信息设置到state中
 export function setStudent(payload){
   return {
@@ -35,6 +50,16 @@ export function closeMsg(){
 // reducers
 function studentReducer(state = initState, action) {
   switch(action.type) {
+    case 'SET_CATEGORY':
+      return {
+        ...state,
+        category:action.payload
+      }
+    case 'SET_Article':
+      return {
+        ...state,
+        article:action.payload
+      } 
     case 'SET_STUDENT': 
       return {
         ...state,

@@ -1,14 +1,26 @@
 import React , {Component} from 'react'
 import {connect} from 'react-redux'
+// 导入同步action
 import {
   showMsg,
   closeMsg,
   beginLoadingStudent,
   setStudent
 } from '../store/student'
+// 导入异步action
+import {
+  asyncLoadArticleList
+} from '../store/rootSaga'
+
 import './Student.css'
 
 class Student extends Component {
+  constructor(props){
+    super(props);
+    // 调用异步action(Effects)
+    this.props.dispatch(asyncLoadArticleList())
+  }
+
   handleShowMsg = ()=>{
     this.props.dispatch(showMsg('hello world'))
   }
@@ -25,7 +37,7 @@ class Student extends Component {
 
   render(){
     console.log(this.props);
-    let {isLoading,list,message} = this.props.students;
+    let {isLoading,list,message,category,article} = this.props.students;
 
     let loadingBox;
     if(isLoading){
@@ -49,6 +61,12 @@ class Student extends Component {
         <div>{msgBox}</div>
         <div>
           {JSON.stringify(list)}
+        </div>
+        <div>
+          栏目信息：{JSON.stringify(category)}
+        </div>
+        <div>
+          文章信息：{JSON.stringify(article)}
         </div>
       </div>
     )
