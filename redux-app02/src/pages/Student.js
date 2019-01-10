@@ -7,6 +7,14 @@ import {
   loadStudent} from '../store/student'
 
 class Student extends Component {
+  constructor(props){
+    super(props);
+    console.log('=======');
+    this.props.dispatch({
+      type:'HELLO'
+    })
+  }
+
   handleAddStudent = ()=> {
     this.props.dispatch(addStudent())
   }
